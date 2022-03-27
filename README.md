@@ -12,6 +12,8 @@ cd nits_proxy
 sudo ./install.sh
 cd .. && rm -rf nits_proxy
 ```
+*NOTE: (The values inside `[]` are default values, you can press Enter without giving any value, and it will take the default value in)*
+
 <br>
 
 *NOTE: If you use a shell different from `bash` then you need to add the line given below to the rc file of your shell (eg. `~/.zshrc`, etc.)*
@@ -24,6 +26,11 @@ cd .. && rm -rf nits_proxy
 
 ```
 source ~/.bashrc
+```
+
+### Run the Script
+```
+nits
 ```
 
 **NOTE: Git no longer allows authentication through HTTPS (only SSH), and setting http.proxy for git won't do anything**

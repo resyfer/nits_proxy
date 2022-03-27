@@ -4,11 +4,18 @@
 HOME_DIR=$(eval echo ~${SUDO_USER})
 
 # Ask for Sudo Permission
-[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+# [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
 echo "Script by resyfer (Saurav Pal)"
 
-read -e -p "Enter College Initials: " -i "NITS" COLLEGE
+# read -e -p "Enter College Initials: " -i "NITS" COLLEGE
+
+# College Name
+COLLEGE=NITS
+echo -n "Enter College Initials [NITS]> "
+read
+[ "$REPLY" != "" ] && COLLEGE=$REPLY
+
 
 FILES=(
   /etc/apt/apt.conf
@@ -31,6 +38,13 @@ for FILE in ${FILES[@]}; do
 done
 
 gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '::1', '*.local']"
+echo -n ".."
+
+sudo cp nitsproxy.sh /bin
+echo "" >> $HOME_DIR/.bashrc
+echo "# ${COLLEGE} Proxy Alias" >> $HOME_DIR/.bashrc
+echo "alias nits='source nitsproxy.sh'" >> $HOME_DIR/.bashrc
+echo "#########################" >> $HOME_DIR/.bashrc
 
 echo "Done"
 echo "Setup successful"

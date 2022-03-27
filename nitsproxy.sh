@@ -1,21 +1,65 @@
 #!/bin/bash
 
 # Get user
+USERNAME=$SUDO_USER
 HOME_DIR=$(eval echo ~${SUDO_USER})
 
 # Ask for Sudo Permission
-[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+# [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
 echo "Script by resyfer (Saurav Pal)"
 
 # Get Values
-read -e -p "Enter College Initials > " -i "NITS" COLLEGE
-read -e -p "Enter Proxy Domain > " -i "172.16.199.40" PROXY_DOMAIN
-read -e -p "Enter Proxy Port > " -i "8080" PROXY_PORT
+## read -e -p "Enter College Initials > " -i "NITS" COLLEGE
+## read -e -p "Enter Proxy Domain > " -i "172.16.199.40" PROXY_DOMAIN
+## read -e -p "Enter Proxy Port > " -i "8080" PROXY_PORT
 
-echo -n "Updating Proxies"
+# College Name
+COLLEGE=NITS
+echo -n "Enter College Initials [NITS]> "
+read
+[ "$REPLY" != "" ] && COLLEGE=$REPLY
 
-if [[ "$PROXY_DOMAIN" != "" ]]; then
+echo ""
+
+# Proxy Domain
+PROXY_DOMAIN=172.16.199.40
+echo "Choose Proxy Domain:"
+echo "    1) 172.16.199.40 (Hostels)"
+echo "    2) 172.16.199.20 (Lab & Library)"
+echo "    3) None (Hotspot)"
+echo -n "Enter Choice [1]> "
+read
+
+case $REPLY in
+
+  1)
+    PROXY_DOMAIN=172.16.199.40
+    ;;
+
+  2)
+    PROXY_DOMAIN=172.16.199.20
+    ;;
+
+  3)
+    PROXY_DOMAIN="none"
+    ;;
+
+esac
+
+echo ""
+
+# Proxy Port
+PROXY_PORT=8080
+echo -n "Enter Proxy Port [8080]> "
+read
+[ "$REPLY" != "" ] && PROXY_PORT=$REPLY
+
+unset REPLY
+
+echo "Updating Proxies"
+
+if [[ "$PROXY_DOMAIN" != "none" ]]; then
 
   URL="http:\/\/${PROXY_DOMAIN}:${PROXY_PORT}"
 
@@ -73,5 +117,6 @@ else
 
 fi
 
+echo ".."
 echo "Done"
 echo "Proxy Update successful"

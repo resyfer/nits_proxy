@@ -22,4 +22,8 @@ cd .. && rm -rf nits_proxy
 
 *NOTE: If you use a shell different from `bash` then you need to replace `bashrc` in the line below to the rc file of your shell (eg. `~/.zshrc`, etc.)*
 
-```source ~/.bashrc```
+```
+source ~/.bashrc
+```
+
+**NOTE: Git no longer allows authentication through HTTPS (only SSH), and setting http.proxy for git won't do anything**

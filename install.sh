@@ -21,6 +21,7 @@ FILES=(
   /etc/apt/apt.conf
   /etc/bash.bashrc
   /etc/environment
+  $HOME_DIR/.bashrc
 )
 
 echo -n "Setting Up"
@@ -36,6 +37,8 @@ for FILE in ${FILES[@]}; do
   echo -n ".."
 
 done
+
+sudo echo "#FTP ${COLLEGE}" >> $HOME_DIR/.bashrc
 
 gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '::1', '*.local']"
 echo -n ".."

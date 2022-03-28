@@ -59,9 +59,22 @@ unset REPLY
 
 echo "Updating Proxies"
 
+unset http_proxy
+unset https_proxy
+unset ftp_proxy
+
 if [[ "$PROXY_DOMAIN" != "none" ]]; then
 
   URL="http:\/\/${PROXY_DOMAIN}:${PROXY_PORT}"
+
+  # ~/.bashrc
+  sudo sed -i "s/.*#HTTP ${COLLEGE}/export http_proxy=${URL}\/ #HTTP ${COLLEGE}/" $HOME_DIR/.bashrc
+  sudo sed -i "s/.*#HTTPS ${COLLEGE}/export https_proxy=${URL}\/ #HTTPS ${COLLEGE}/" $HOME_DIR/.bashrc
+  sudo sed -i "s/.*#FTP ${COLLEGE}/export ftp_proxy=${URL}\/ #FTP ${COLLEGE}/" $HOME_DIR/.bashrc
+
+  export http_proxy="http://${PROXY_DOMAIN}:${PROXY_PORT}"
+  export https_proxy="http://${PROXY_DOMAIN}:${PROXY_PORT}"
+  export ftp_proxy="http://${PROXY_DOMAIN}:${PROXY_PORT}"
 
   # /etc/apt/apt.conf
   sudo sed -i "s/.*#HTTP ${COLLEGE}/Acquire::http::Proxy \"${URL}\"; #HTTP ${COLLEGE}/" /etc/apt/apt.conf
@@ -110,6 +123,10 @@ else
     echo -n ".."
 
   done
+
+  sudo sed -i "s/.*#HTTP ${COLLEGE}/unset http_proxy #HTTP ${COLLEGE}/" $HOME_DIR/.bashrc
+  sudo sed -i "s/.*#HTTPS ${COLLEGE}/unset https_proxy #HTTPS ${COLLEGE}/" $HOME_DIR/.bashrc
+  sudo sed -i "s/.*#HTTPS ${COLLEGE}/unset ftp_proxy #FTP ${COLLEGE}/" $HOME_DIR/.bashrc
 
   gsettings set org.gnome.system.proxy mode 'none'
 

@@ -1,7 +1,7 @@
 # NITS Proxy
 NITS Proxy for Terminal Commands (except SSH & Git)
 
-**NOTE: Git no longer allows authentication through HTTPS (only SSH), and setting http.proxy for git won't do anything**
+**NOTE: Git no longer allows authentication through HTTPS (only SSH), and setting http.proxy for git won't do anything unless using personal access token or OAuth in some form like VSCode GitHub Pull & Push Request extension**
 
 ## Windows
 
@@ -11,13 +11,6 @@ Address (For Hostels) : `172.16.199.40` <br>
 Address (For Labs & Library) : `172.16.199.20` <br>
 Port : `8080` <br>
 Exception (Big Input Box) : `*.local` <br>
-
-### Npm
-```
-npm config set http-proxy http://172.16.199.40:8080
-npm config set https-proxy http://172.16.199.40:8080
-```
-*NOTE: Change the values according to the proxy address*
 
 **NOTE: Turn off proxy for mobile hotspot**
 

@@ -24,7 +24,25 @@ FILES=(
   $HOME_DIR/.bashrc
 )
 
-echo -n "Setting Up"
+echo "The script will ask for sudo access if not granted."
+
+echo ""
+
+
+GNOME=YES
+echo -n "Are you using GNOME Desktop Environment? Y/n [Y]> "
+read
+if [[ "$REPLY" == "y" || "$REPLY" == "Y" || "$REPLY" == "" ]]; then
+  GNOME=YES
+else
+  GNOME=NO
+fi
+
+if [[ "$GNOME" == "YES" ]]; then
+  gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '::1', '*.local']"
+fi
+
+echo -n "Setting Up..."
 
 for FILE in ${FILES[@]}; do
 
@@ -39,8 +57,6 @@ for FILE in ${FILES[@]}; do
 done
 
 sudo echo "#FTP ${COLLEGE}" >> $HOME_DIR/.bashrc
-
-gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '::1', '*.local']"
 echo -n ".."
 
 sudo cp nitsproxy.sh /bin

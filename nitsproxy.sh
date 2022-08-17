@@ -22,6 +22,22 @@ read
 
 echo ""
 
+GNOME=YES
+echo -n "Are you using GNOME Desktop Environment? Y/n [Y]> "
+read
+
+if [[ "$REPLY" == "y" || "$REPLY" == "Y" || "$REPLY" == "" ]]; then
+  GNOME=YES
+else
+  GNOME=NO
+fi
+
+echo ""
+
+echo "The script will ask for sudo permission if not provided."
+
+echo ""
+
 # Proxy Domain
 PROXY_DOMAIN=172.16.199.40
 echo "Choose Proxy Domain:"
@@ -94,17 +110,27 @@ if [[ "$PROXY_DOMAIN" != "none" ]]; then
 
   echo -n ".."
 
+  # Git Proxy Settings
+  git config --global http.proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
+  git config --global https.proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
+
+  # NPM Proxy Settings
+  npm config set proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
+  npm config set https-proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
+
   # Gnome Proxy Settings
-  gsettings set org.gnome.system.proxy mode 'manual'
+  if [[ "$GNOME" == "YES" ]]; then
+    gsettings set org.gnome.system.proxy mode 'manual'
 
-  gsettings set org.gnome.system.proxy.http host "${PROXY_DOMAIN}"
-  gsettings set org.gnome.system.proxy.http port "${PROXY_PORT}"
+    gsettings set org.gnome.system.proxy.http host "${PROXY_DOMAIN}"
+    gsettings set org.gnome.system.proxy.http port "${PROXY_PORT}"
 
-  gsettings set org.gnome.system.proxy.https host "${PROXY_DOMAIN}"
-  gsettings set org.gnome.system.proxy.https port "${PROXY_PORT}"
+    gsettings set org.gnome.system.proxy.https host "${PROXY_DOMAIN}"
+    gsettings set org.gnome.system.proxy.https port "${PROXY_PORT}"
 
-  gsettings set org.gnome.system.proxy.ftp host "${PROXY_DOMAIN}"
-  gsettings set org.gnome.system.proxy.ftp port "${PROXY_PORT}"
+    gsettings set org.gnome.system.proxy.ftp host "${PROXY_DOMAIN}"
+    gsettings set org.gnome.system.proxy.ftp port "${PROXY_PORT}"
+  fi
 
   echo -n ".."
 
@@ -128,7 +154,17 @@ else
   sudo sed -i "s/.*#HTTPS ${COLLEGE}/unset https_proxy #HTTPS ${COLLEGE}/" $HOME_DIR/.bashrc
   sudo sed -i "s/.*#HTTPS ${COLLEGE}/unset ftp_proxy #FTP ${COLLEGE}/" $HOME_DIR/.bashrc
 
-  gsettings set org.gnome.system.proxy mode 'none'
+  # Git Proxy Settings
+  git config --global http.proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
+  git config --global https.proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
+
+  # NPM Proxy Settings
+  npm config rm proxy
+  npm config rm https-proxy
+
+  if [[ "$GNOME" == "YES" ]]; then
+    gsettings set org.gnome.system.proxy mode 'none'
+  fi
 
   echo -n ".."
 

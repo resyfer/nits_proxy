@@ -1,13 +1,34 @@
 #!/bin/bash
 
+echo ""
+
+# set -e
+
+# Text Outline
+RESET='\033[0m'
+BOLD='\033[1m'
+ITALIC='\033[3m'
+UNDERLINE='\033[4m'
+BLINKING='\033[5m'
+
 # Get user
 USERNAME=$SUDO_USER
 HOME_DIR=$(eval echo ~${SUDO_USER})
-
 # Ask for Sudo Permission
 # [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
-echo "Script by resyfer (Saurav Pal)"
+# echo "Script by resyfer (Saurav Pal)"
+echo " "$BOLD$UNDERLINE$BLINKING'National Institute of Technology, Silchar'$RESET
+
+echo ""
+echo "Hello" $BOLD$USERNAME$RESET
+echo "Setup proxy for NIT Silchar"
+
+echo ""
+
+echo $BOLD"**The script will ask for sudo permission if not provided.**"$RESET
+
+echo ""
 
 # Get Values
 ## read -e -p "Enter College Initials > " -i "NITS" COLLEGE
@@ -16,14 +37,14 @@ echo "Script by resyfer (Saurav Pal)"
 
 # College Name
 COLLEGE=NITS
-echo -n "Enter College Initials [NITS]> "
-read
-[ "$REPLY" != "" ] && COLLEGE=$REPLY
+# echo -n "Enter College Initials [NITS]> "
+# read
+# [ "$REPLY" != "" ] && COLLEGE=$REPLY
 
-echo ""
+# echo ""
 
 GNOME=YES
-echo -n "Are you using GNOME Desktop Environment? Y/n [Y]> "
+echo -n "GNOME Desktop Environment? Y/n ["$ITALIC"Y"$RESET"]> "
 read
 
 if [[ "$REPLY" == "y" || "$REPLY" == "Y" || "$REPLY" == "" ]]; then
@@ -34,17 +55,13 @@ fi
 
 echo ""
 
-echo "The script will ask for sudo permission if not provided."
-
-echo ""
-
 # Proxy Domain
 PROXY_DOMAIN=172.16.199.40
 echo "Choose Proxy Domain:"
-echo "    1) 172.16.199.40 (Hostels)"
-echo "    2) 172.16.199.20 (Lab & Library)"
-echo "    3) None (Hotspot)"
-echo -n "Enter Choice [1]> "
+echo "    1) "$BOLD"172.16.199.40"$RESET "(Hostels)"
+echo "    2) "$BOLD"172.16.199.20"$RESET "(Labs & Library)"
+echo "    3) "$BOLD"None"$RESET "(Personal Internet)"
+echo -n "Enter Choice ["$ITALIC"1"$RESET"]> "
 read
 
 case $REPLY in
@@ -67,17 +84,23 @@ echo ""
 
 # Proxy Port
 PROXY_PORT=8080
-echo -n "Enter Proxy Port [8080]> "
+echo -n "Enter Proxy Port ["$ITALIC"8080"$RESET"]> "
 read
 [ "$REPLY" != "" ] && PROXY_PORT=$REPLY
 
 unset REPLY
 
+echo ""
+
 echo "Updating Proxies"
 
 unset http_proxy
+
+if [[ $? -ne 0 ]] ; then
+  return
+fi
+
 unset https_proxy
-unset ftp_proxy
 
 if [[ "$PROXY_DOMAIN" != "none" ]]; then
 
@@ -85,12 +108,20 @@ if [[ "$PROXY_DOMAIN" != "none" ]]; then
 
   # ~/.bashrc
   sudo sed -i "s/.*#HTTP ${COLLEGE}/export http_proxy=${URL}\/ #HTTP ${COLLEGE}/" $HOME_DIR/.bashrc
+
+  if [[ $? -ne 0 ]] ; then
+    return
+  fi
+
   sudo sed -i "s/.*#HTTPS ${COLLEGE}/export https_proxy=${URL}\/ #HTTPS ${COLLEGE}/" $HOME_DIR/.bashrc
-  sudo sed -i "s/.*#FTP ${COLLEGE}/export ftp_proxy=${URL}\/ #FTP ${COLLEGE}/" $HOME_DIR/.bashrc
 
   export http_proxy="http://${PROXY_DOMAIN}:${PROXY_PORT}"
+
+  if [[ $? -ne 0 ]] ; then
+    return
+  fi
+
   export https_proxy="http://${PROXY_DOMAIN}:${PROXY_PORT}"
-  export ftp_proxy="http://${PROXY_DOMAIN}:${PROXY_PORT}"
 
   # /etc/apt/apt.conf
   sudo sed -i "s/.*#HTTP ${COLLEGE}/Acquire::http::Proxy \"${URL}\"; #HTTP ${COLLEGE}/" /etc/apt/apt.conf
@@ -112,15 +143,29 @@ if [[ "$PROXY_DOMAIN" != "none" ]]; then
 
   # Git Proxy Settings
   git config --global http.proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
+
+  if [[ $? -ne 0 ]] ; then
+    return
+  fi
+
   git config --global https.proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
 
   # NPM Proxy Settings
   npm config set proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
+
+  if [[ $? -ne 0 ]] ; then
+    return
+  fi
+
   npm config set https-proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
 
   # Gnome Proxy Settings
   if [[ "$GNOME" == "YES" ]]; then
     gsettings set org.gnome.system.proxy mode 'manual'
+
+    if [[ $? -ne 0 ]] ; then
+      return
+    fi
 
     gsettings set org.gnome.system.proxy.http host "${PROXY_DOMAIN}"
     gsettings set org.gnome.system.proxy.http port "${PROXY_PORT}"
@@ -128,8 +173,6 @@ if [[ "$PROXY_DOMAIN" != "none" ]]; then
     gsettings set org.gnome.system.proxy.https host "${PROXY_DOMAIN}"
     gsettings set org.gnome.system.proxy.https port "${PROXY_PORT}"
 
-    gsettings set org.gnome.system.proxy.ftp host "${PROXY_DOMAIN}"
-    gsettings set org.gnome.system.proxy.ftp port "${PROXY_PORT}"
   fi
 
   echo -n ".."
@@ -151,25 +194,44 @@ else
   done
 
   sudo sed -i "s/.*#HTTP ${COLLEGE}/unset http_proxy #HTTP ${COLLEGE}/" $HOME_DIR/.bashrc
+
+  if [[ $? -ne 0 ]] ; then
+    return
+  fi
+
   sudo sed -i "s/.*#HTTPS ${COLLEGE}/unset https_proxy #HTTPS ${COLLEGE}/" $HOME_DIR/.bashrc
-  sudo sed -i "s/.*#HTTPS ${COLLEGE}/unset ftp_proxy #FTP ${COLLEGE}/" $HOME_DIR/.bashrc
 
   # Git Proxy Settings
-  git config --global http.proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
-  git config --global https.proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
+  git config --global --unset http.proxy
+
+  if [[ $? -ne 0 ]] ; then
+    return
+  fi
+
+  git config --global --unset https.proxy
 
   # NPM Proxy Settings
   npm config rm proxy
+
+  if [[ $? -ne 0 ]] ; then
+    return
+  fi
+
   npm config rm https-proxy
 
   if [[ "$GNOME" == "YES" ]]; then
     gsettings set org.gnome.system.proxy mode 'none'
   fi
 
+  if [[ $? -ne 0 ]] ; then
+    return
+  fi
+
   echo -n ".."
 
 fi
 
-echo ".."
+echo -n ".."
 echo "Done"
-echo "Proxy Update successful"
+echo ""
+echo $BOLD"Proxy Updated"$RESET

@@ -143,20 +143,10 @@ if [[ "$PROXY_DOMAIN" != "none" ]]; then
 
   # Git Proxy Settings
   git config --global http.proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
-
-  if [[ $? -ne 0 ]] ; then
-    return
-  fi
-
   git config --global https.proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
 
   # NPM Proxy Settings
   npm config set proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
-
-  if [[ $? -ne 0 ]] ; then
-    return
-  fi
-
   npm config set https-proxy http://${PROXY_DOMAIN}:${PROXY_PORT}
 
   # Gnome Proxy Settings
@@ -203,20 +193,10 @@ else
 
   # Git Proxy Settings
   git config --global --unset http.proxy
-
-  if [[ $? -ne 0 ]] ; then
-    return
-  fi
-
   git config --global --unset https.proxy
 
   # NPM Proxy Settings
   npm config rm proxy
-
-  if [[ $? -ne 0 ]] ; then
-    return
-  fi
-
   npm config rm https-proxy
 
   if [[ "$GNOME" == "YES" ]]; then

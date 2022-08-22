@@ -85,20 +85,10 @@ fi
 
 # Git Proxy Settings
 git config --global --unset http.proxy
-
-if [[ $? -ne 0 ]] ; then
-  return
-fi
-
 git config --global --unset https.proxy
 
 # NPM Proxy Settings
 npm config rm proxy
-
-if [[ $? -ne 0 ]] ; then
-  return
-fi
-
 npm config rm https-proxy
 
 if [[ "$GNOME" == "YES" ]]; then

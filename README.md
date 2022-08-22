@@ -45,3 +45,64 @@ source ~/.bashrc
 ```
 nits
 ```
+## Manual Installation For Some Technologies
+*NOTE: If any of the technologies mentioned are working as intended after the above steps, you do not have to set their proxies manually.*
+## Git
+### set
+```bash
+#for hostels
+git config --global http.proxy http://172.16.199.40:8080
+git config --global https.proxy http://172.16.199.40:8080
+
+#for labs and library
+git config --global http.proxy http://172.16.199.20:8080
+git config --global https.proxy http://172.16.199.20:8080
+```
+### unset
+```
+npm config rm proxy
+npm config rm https-proxy
+```
+### check current proxy
+```
+git config --global --get htts.proxy
+git config --global --get http.proxy
+```
+
+## npm
+### set
+```bash
+#for hostels
+npm config set proxy http://172.16.199.40:8080
+npm config set https-proxy http://172.16.199.40:8080
+
+#for labs and library
+npm config set proxy http://172.16.199.20:8080
+npm config set https-proxy http://172.16.199.20:8080
+```
+### unset
+```
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+## pip
+### Linux
+```bash
+#for hostels
+sudo pip install --proxy http://172.16.199.40:8080 <pkg_name> 
+
+#for labs and library
+sudo pip install --proxy http://172.16.199.20:8080 <pkg_name> 
+```
+### Windows
+```bash
+#For hostels
+pip install --proxy http://172.16.199.40:8080 <pkg_name> 
+
+#For labs and library
+pip install --proxy http://172.16.199.20:8080 <pkg_name> 
+
+```
+## Visual Studio Code
+This sets both http and https proxy.  
+`Settings> Search for "proxy"> Https: Proxy`

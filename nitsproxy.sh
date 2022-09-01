@@ -18,7 +18,9 @@ HOME_DIR=$(eval echo ~${SUDO_USER})
 # [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
 # echo "Script by resyfer (Saurav Pal)"
-echo " "$BOLD$UNDERLINE$BLINKING'National Institute of Technology, Silchar'$RESET
+echo " "$BOLD$UNDERLINE'National Institute of Technology, Silchar'$RESET
+
+echo "\tScript By "$BOLD"Saurav Pal, Cloud Moderator, GDSC NIT Silchar"$RESET
 
 echo ""
 echo "Hello" $BOLD$USERNAME$RESET
@@ -56,18 +58,19 @@ fi
 echo ""
 
 # Proxy Domain
-PROXY_DOMAIN=172.16.199.40
+PROXY_DOMAIN=172.16.199.41
 echo "Choose Proxy Domain:"
-echo "    1) "$BOLD"172.16.199.40"$RESET "(Hostels)"
+echo "    1) "$BOLD"172.16.199.41"$RESET "(BH9)"
 echo "    2) "$BOLD"172.16.199.20"$RESET "(Labs & Library)"
-echo "    3) "$BOLD"None"$RESET "(Personal Internet)"
+echo "    3) "$BOLD"172.16.199.40"$RESET "(Other Hostels)"
+echo "    4) "$BOLD"None"$RESET "(Personal Internet)"
 echo -n "Enter Choice ["$ITALIC"1"$RESET"]> "
 read
 
 case $REPLY in
 
   1)
-    PROXY_DOMAIN=172.16.199.40
+    PROXY_DOMAIN=172.16.199.41
     ;;
 
   2)
@@ -75,6 +78,10 @@ case $REPLY in
     ;;
 
   3)
+    PROXY_DOMAIN=172.16.199.40
+    ;;
+
+  4)
     PROXY_DOMAIN="none"
     ;;
 

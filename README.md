@@ -21,11 +21,11 @@ This will enable you to switch between Hostel Proxy, Lab & Library Proxy and Mob
 
 ### Installation
 
-```
-git clone https://github.com/resyfer/nits_proxy.git
-cd nits_proxy
-sudo ./install.sh
-cd .. && rm -rf nits_proxy
+```bash
+$ git clone https://github.com/resyfer/nits_proxy.git
+$ cd nits_proxy
+$ sudo ./install.sh
+$ cd .. && rm -rf nits_proxy
 ```
 
 _NOTE: During the prompts, the values inside `[]` in italics are default values, you can press `Enter` without giving any value, and it will take the default value_
@@ -40,18 +40,23 @@ _NOTE: Only if you use a shell different from `bash` then you need to add the li
 
 _NOTE: If you use a shell different from `bash` then you need to replace `bashrc` in the line below to the rc file of your shell (eg. `~/.zshrc`, etc.)_
 
-```
-source ~/.bashrc
+```bash
+$ source ~/.bashrc
 ```
 
 or you can close the terminal and start a new one.
 
 or you can close the terminal and start a new one.
+
+### Updating
+```bash
+$ sudo cp nitsproxy.sh /bin
+```
 
 ### Run the Script
 
-```
-nits
+```bash
+$ nits
 ```
 
 ## Manual Installation For Some Technologies
@@ -66,26 +71,26 @@ _For other operating systems, you might have to set and unset the proxies manual
 
 ```bash
 # For hostels
-git config --global http.proxy http://172.16.199.40:8080
-git config --global https.proxy http://172.16.199.40:8080
+$ git config --global http.proxy http://172.16.199.40:8080
+$ git config --global https.proxy http://172.16.199.40:8080
 
 # For labs and library
-git config --global http.proxy http://172.16.199.20:8080
-git config --global https.proxy http://172.16.199.20:8080
+$ git config --global http.proxy http://172.16.199.20:8080
+$ git config --global https.proxy http://172.16.199.20:8080
 ```
 
 ### unset
 
 ```bash
-git config --global --unset http.proxy
-git config --global --unset https.proxy
+$ git config --global --unset http.proxy
+$ git config --global --unset https.proxy
 ```
 
 ### check current proxy
 
 ```bashbash
-git config --global --get htts.proxy
-git config --global --get http.proxy
+$ git config --global --get htts.proxy
+$ git config --global --get http.proxy
 ```
 
 ## npm
@@ -94,19 +99,19 @@ git config --global --get http.proxy
 
 ```bash
 # For hostels
-npm config set proxy http://172.16.199.40:8080
-npm config set https-proxy http://172.16.199.40:8080
+$ npm config set proxy http://172.16.199.40:8080
+$ npm config set https-proxy http://172.16.199.40:8080
 
 # For labs and library
-npm config set proxy http://172.16.199.20:8080
-npm config set https-proxy http://172.16.199.20:8080
+$ npm config set proxy http://172.16.199.20:8080
+$ npm config set https-proxy http://172.16.199.20:8080
 ```
 
 ### unset
 
 ```bash
-npm config rm proxy
-npm config rm https-proxy
+$ npm config rm proxy
+$ npm config rm https-proxy
 ```
 
 ## pip
@@ -115,20 +120,20 @@ npm config rm https-proxy
 
 ```bash
 # For hostels
-sudo pip install --proxy http://172.16.199.40:8080 <pkg_name>
+$ sudo pip install --proxy http://172.16.199.40:8080 <pkg_name>
 
 # For labs and library
-sudo pip install --proxy http://172.16.199.20:8080 <pkg_name>
+$ sudo pip install --proxy http://172.16.199.20:8080 <pkg_name>
 ```
 
 ### Windows
 
 ```bash
 # For hostels
-pip install --proxy http://172.16.199.40:8080 <pkg_name>
+$ pip install --proxy http://172.16.199.40:8080 <pkg_name>
 
 # For labs and library
-pip install --proxy http://172.16.199.20:8080 <pkg_name>
+$ pip install --proxy http://172.16.199.20:8080 <pkg_name>
 
 ```
 

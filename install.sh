@@ -14,7 +14,8 @@ HOME_DIR=$(eval echo ~${SUDO_USER})
 # [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
 # echo "Script by resyfer (Saurav Pal)"
-echo -e $BOLD$UNDERLINE$BLINKING'National Institute of Technology, Silchar'$RESET
+echo -e $BOLD$UNDERLINE'National Institute of Technology, Silchar'$RESET
+echo -e "\tScript By "$BOLD"Saurav Pal, Cloud Moderator, GDSC NIT Silchar"$RESET
 
 echo ""
 echo -e "Hello" $BOLD$USERNAME$RESET

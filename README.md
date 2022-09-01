@@ -46,8 +46,6 @@ $ source ~/.bashrc
 
 or you can close the terminal and start a new one.
 
-or you can close the terminal and start a new one.
-
 ### Updating
 ```bash
 $ sudo cp nitsproxy.sh /bin

@@ -18,17 +18,17 @@ HOME_DIR=$(eval echo ~${SUDO_USER})
 # [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
 # echo "Script by resyfer (Saurav Pal)"
-echo " "$BOLD$UNDERLINE'National Institute of Technology, Silchar'$RESET
+echo -e " "$BOLD$UNDERLINE'National Institute of Technology, Silchar'$RESET
 
-echo "\tScript By "$BOLD"Saurav Pal, Cloud Moderator, GDSC NIT Silchar"$RESET
+echo -e "\tScript By "$BOLD"Saurav Pal, Cloud Moderator, GDSC NIT Silchar"$RESET
 
 echo ""
-echo "Hello" $BOLD$USERNAME$RESET
+echo -e "Hello" $BOLD$USERNAME$RESET
 echo "Setup proxy for NIT Silchar"
 
 echo ""
 
-echo $BOLD"**The script will ask for sudo permission if not provided.**"$RESET
+echo -e $BOLD"**The script will ask for sudo permission if not provided.**"$RESET
 
 echo ""
 
@@ -46,7 +46,7 @@ COLLEGE=NITS
 # echo ""
 
 GNOME=YES
-echo -n "GNOME Desktop Environment? Y/n ["$ITALIC"Y"$RESET"]> "
+echo -n -e "GNOME Desktop Environment? Y/n ["$ITALIC"Y"$RESET"]> "
 read
 
 if [[ "$REPLY" == "y" || "$REPLY" == "Y" || "$REPLY" == "" ]]; then
@@ -60,10 +60,10 @@ echo ""
 # Proxy Domain
 PROXY_DOMAIN=172.16.199.41
 echo "Choose Proxy Domain:"
-echo "    1) "$BOLD"172.16.199.41"$RESET "(BH9)"
-echo "    2) "$BOLD"172.16.199.20"$RESET "(Labs & Library)"
-echo "    3) "$BOLD"172.16.199.40"$RESET "(Other Hostels)"
-echo "    4) "$BOLD"None"$RESET "(Personal Internet)"
+echo -e "    1) "$BOLD"172.16.199.41"$RESET "(BH9)"
+echo -e "    2) "$BOLD"172.16.199.20"$RESET "(Labs & Library)"
+echo -e "    3) "$BOLD"172.16.199.40"$RESET "(Other Hostels)"
+echo -e "    4) "$BOLD"None"$RESET "(Personal Internet)"
 echo -n "Enter Choice ["$ITALIC"1"$RESET"]> "
 read
 
@@ -91,7 +91,7 @@ echo ""
 
 # Proxy Port
 PROXY_PORT=8080
-echo -n "Enter Proxy Port ["$ITALIC"8080"$RESET"]> "
+echo -n -e "Enter Proxy Port ["$ITALIC"8080"$RESET"]> "
 read
 [ "$REPLY" != "" ] && PROXY_PORT=$REPLY
 
@@ -221,4 +221,4 @@ fi
 echo -n ".."
 echo "Done"
 echo ""
-echo $BOLD"Proxy Updated"$RESET
+echo -e $BOLD"Proxy Updated"$RESET

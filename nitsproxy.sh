@@ -64,7 +64,7 @@ echo -e "    1) "$BOLD"172.16.199.41"$RESET "(BH9)"
 echo -e "    2) "$BOLD"172.16.199.20"$RESET "(Labs & Library)"
 echo -e "    3) "$BOLD"172.16.199.40"$RESET "(Other Hostels)"
 echo -e "    4) "$BOLD"None"$RESET "(Personal Internet)"
-echo -n "Enter Choice ["$ITALIC"1"$RESET"]> "
+echo -n -e "Enter Choice ["$ITALIC"1"$RESET"]> "
 read
 
 case $REPLY in

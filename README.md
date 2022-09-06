@@ -46,8 +46,6 @@ $ source ~/.bashrc
 
 or you can close the terminal and start a new one.
 
-or you can close the terminal and start a new one.
-
 ### Updating
 ```bash
 $ sudo cp nitsproxy.sh /bin
@@ -65,18 +63,20 @@ _NOTE: If you are using Linux and have installed the script, you are not require
 
 _For other operating systems, you might have to set and unset the proxies manually if they don't inherit the proxy settings from the system._
 
+## Proxy Values
+
+- BH9 : `http://172.16.199.41:8080`
+- Other Hostels : `http://172.16.199.40:8080`
+- Labs and Libraries : `http://172.16.199.20:8080`
+- Mobile Hostpot : None
+
 ## Git
 
 ### set
 
 ```bash
-# For hostels
-$ git config --global http.proxy http://172.16.199.40:8080
-$ git config --global https.proxy http://172.16.199.40:8080
-
-# For labs and library
-$ git config --global http.proxy http://172.16.199.20:8080
-$ git config --global https.proxy http://172.16.199.20:8080
+$ git config --global http.proxy PROXY_VALUE
+$ git config --global https.proxy PROXY_VALUE
 ```
 
 ### unset
@@ -98,13 +98,8 @@ $ git config --global --get http.proxy
 ### set
 
 ```bash
-# For hostels
-$ npm config set proxy http://172.16.199.40:8080
-$ npm config set https-proxy http://172.16.199.40:8080
-
-# For labs and library
-$ npm config set proxy http://172.16.199.20:8080
-$ npm config set https-proxy http://172.16.199.20:8080
+$ npm config set proxy PROXY_VALUE
+$ npm config set https-proxy PROXY_VALUE
 ```
 
 ### unset
@@ -119,22 +114,13 @@ $ npm config rm https-proxy
 ### Linux
 
 ```bash
-# For hostels
-$ sudo pip install --proxy http://172.16.199.40:8080 <pkg_name>
-
-# For labs and library
-$ sudo pip install --proxy http://172.16.199.20:8080 <pkg_name>
+$ sudo pip install --proxy PROXY_VALUE <pkg_name>
 ```
 
 ### Windows
 
 ```bash
-# For hostels
-$ pip install --proxy http://172.16.199.40:8080 <pkg_name>
-
-# For labs and library
-$ pip install --proxy http://172.16.199.20:8080 <pkg_name>
-
+$ pip install --proxy PROXY_VALUE <pkg_name>
 ```
 
 ## Visual Studio Code

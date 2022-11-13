@@ -1,5 +1,8 @@
 #!/bin/bash
 
+source ./prompt.sh
+source ./colors.sh
+
 echo ""
 
 # set -e
@@ -57,31 +60,37 @@ fi
 
 echo ""
 
+options=("172.16.199.41 (BH9)", "172.16.199.40 (Other Hostels)", "172.16.199.20 (Labs & Library)", "None")
+
 # Proxy Domain
 PROXY_DOMAIN=172.16.199.41
+# echo -e "    1) "$BOLD"172.16.199.41"$RESET "(BH9)"
+# echo -e "    2) "$BOLD"172.16.199.20"$RESET "(Labs & Library)"
+# echo -e "    3) "$BOLD"172.16.199.40"$RESET "(Other Hostels)"
+# echo -e "    4) "$BOLD"None"$RESET "(Personal Internet)"
+# echo -n -e "Enter Choice ["$ITALIC"1"$RESET"]> "
+# read
+
 echo "Choose Proxy Domain:"
-echo -e "    1) "$BOLD"172.16.199.41"$RESET "(BH9)"
-echo -e "    2) "$BOLD"172.16.199.20"$RESET "(Labs & Library)"
-echo -e "    3) "$BOLD"172.16.199.40"$RESET "(Other Hostels)"
-echo -e "    4) "$BOLD"None"$RESET "(Personal Internet)"
-echo -n -e "Enter Choice ["$ITALIC"1"$RESET"]> "
-read
+select_option "${options[@]}"
+REPLY=$?
+echo $REPLY
 
 case $REPLY in
 
-  1)
+  0)
     PROXY_DOMAIN=172.16.199.41
     ;;
 
-  2)
+  1)
     PROXY_DOMAIN=172.16.199.20
     ;;
 
-  3)
+  2)
     PROXY_DOMAIN=172.16.199.40
     ;;
 
-  4)
+  3)
     PROXY_DOMAIN="none"
     ;;
 

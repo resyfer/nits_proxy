@@ -1,3 +1,5 @@
+**NOTE: This project is an unrepairable mess, and has poor design. A better one's available [here](https://github.com/resyfer/proxy) and so please make any contributions or issues there! Thanks!**
+
 # NITS Proxy
 
 NITS Proxy for Terminal Commands (except SSH)
@@ -89,7 +91,7 @@ $ git config --global --unset https.proxy
 ### check current proxy
 
 ```bashbash
-$ git config --global --get htts.proxy
+$ git config --global --get http.proxy
 $ git config --global --get http.proxy
 ```
 
